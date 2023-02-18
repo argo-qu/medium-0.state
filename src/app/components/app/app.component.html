@@ -1,0 +1,31 @@
+<div class="users-form">
+  <form [formGroup]="form">
+    <div class="users-form__control">
+      <label for="firstName">First Name</label>
+      <input type="text" formControlName="firstName" id="firstName" placeholder="John">
+    </div>
+
+    <div class="users-form__control">
+      <label for="lastName">Last Name</label>
+      <input type="text" formControlName="lastName" id="lastName" placeholder="Doe">
+    </div>
+
+    <div class="users-form__control">
+      <label for="age">Age</label>
+      <input type="number" formControlName="age" id="age" placeholder="18">
+    </div>
+
+    <button [disabled]="form.invalid" (click)="addNewUser()">Add new User</button>
+  </form>
+</div>
+
+<div class="users-list">
+
+  <ng-container *ngFor="let user of users$ | async; let index = index">
+    <div class="users-list__user">
+      {{user.firstName}} {{user.lastName}}, {{user.age}} years old
+      <button (click)="removeUser(index)">X</button>
+    </div>
+  </ng-container>
+
+</div>
