@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, distinctUntilChanged, map, Observable} from 'rxjs';
 import {State} from '../../typings/interfaces/state.interface';
-import {deepEqual} from 'fast-equals';
 import {initialState} from '../../constants/initial-state.const';
+import equal from 'deep-equal';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class StateService {
   select<K>(mapFn: (state: State) => K): Observable<K> {
     return this.state$.pipe(
       map(mapFn),
-      distinctUntilChanged((a: K, b: K) => deepEqual(a, b))
+      distinctUntilChanged((a: K, b: K) => equal(a, b))
     );
   }
 
