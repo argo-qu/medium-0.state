@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import {StateService} from './state.service';
 import {User} from '../../typings/interfaces/user.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class StateActionsService {
   constructor(private state: StateService) { }
 
@@ -21,5 +19,4 @@ export class StateActionsService {
       users: users.slice(0, index).concat(users.slice(index + 1))
     });
   }
-
 }

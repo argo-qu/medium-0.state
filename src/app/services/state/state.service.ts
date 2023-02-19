@@ -2,11 +2,9 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, distinctUntilChanged, map, Observable} from 'rxjs';
 import {State} from '../../typings/interfaces/state.interface';
 import {initialState} from '../../constants/initial-state.const';
-import equal from 'deep-equal';
+import equal from 'fast-deep-equal';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class StateService {
   private state: BehaviorSubject<State> = new BehaviorSubject<State>(initialState);
 
@@ -26,6 +24,6 @@ export class StateService {
   }
 
   setState(newState: State): void {
-    this.state.next({...newState});
+    this.state.next(Object.freeze({...newState}));
   }
 }
